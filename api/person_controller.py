@@ -6,8 +6,13 @@ from datetime import datetime
 from database import get_db
 from service.person_service import PersonService
 from schemas.person_schema import PersonCreate, PersonUpdate, PersonResponse
+from .auth_controller import get_current_user
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/persons",
+    tags=["person"],
+    dependencies=[Depends(get_current_user)]
+)
 
 @router.post("/person", response_model=PersonResponse)
 def create_person(person: PersonCreate, db: Session = Depends(get_db)):
