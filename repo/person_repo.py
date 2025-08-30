@@ -41,4 +41,4 @@ class PersonRepository:
         return db_person
 
     def get_updated_after(self, timestamp: datetime) -> List[Person]:
-        return self.db.query(Person).filter(Person.updatedAt > timestamp).all()
+        return self.db.query(Person).filter(Person.updatedAt > timestamp, Person.isDeleted == False).all()
