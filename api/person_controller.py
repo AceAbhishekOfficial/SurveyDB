@@ -37,3 +37,7 @@ def delete_person(person_id: str, deleted_by: str = Query(...), db: Session = De
 @router.get("/person", response_model=List[PersonResponse])
 def get_persons_updated_after(updatedAfter: datetime, db: Session = Depends(get_db)):
     return PersonService(db).get_persons_updated_after(updatedAfter)
+
+@router.post("/persons/bulk", response_model=list[PersonResponse])
+def bulk_upsert_persons(persons: list[PersonCreate], db: Session = Depends(get_db)):
+    return PersonService(db).bulk_upsert_persons(persons)

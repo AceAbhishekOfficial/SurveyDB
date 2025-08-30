@@ -6,6 +6,7 @@ from datetime import datetime
 # Base Schema (common fields)
 # ---------------------------
 class PersonBase(BaseModel):
+    id: Optional[str] = None  # allow null for new records
     fullName: str
     fatherOrHusbandName: Optional[str] = None
     dateOfBirth: Optional[datetime] = None
