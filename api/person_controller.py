@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 from datetime import datetime
 
 from database import get_db
 from service.person_service import PersonService
-from schemas.person_schema import PersonCreate, PersonUpdate, PersonResponse
+from schemas.person_schema import PersonCreate, PersonUpdate, PersonResponse, PaginatedPersons
 from .auth_controller import get_current_user
 
 router = APIRouter(
@@ -46,3 +46,38 @@ def get_persons_updated_after(updatedAfter: datetime = 0, db: Session = Depends(
 @router.post("/persons/bulk", response_model=list[PersonResponse])
 def bulk_upsert_persons(persons: list[PersonCreate], db: Session = Depends(get_db)):
     return PersonService(db).bulk_upsert_persons(persons)
+
+# New endpoint: getByFilters
+@router.get("/filteredPerson", response_model=PaginatedPersons)
+def get_persons_by_filters(
+    fullName: Optional[str] = Query(None, description="Filter by full name"),
+    village: Optional[str] = Query(None, description="Filter by village"),
+    block: Optional[str] = Query(None, description="Filter by block"),
+    district: Optional[str] = Query(None, description="Filter by district"),
+    page: int = Query(1, ge=1, description="Page number"),
+    size: int = Query(20, ge=1, description="Page size"),
+    db: Session = Depends(get_db)
+):
+    service = PersonService(db)
+    items, total = service.get_persons_by_filters(
+        full_name=fullName,
+        village=village,
+        block=block,
+        district=district,
+        page=page,
+        size=size
+    )
+
+    total_pages = (total + size - 1) // size if size else 0
+    has_next = page < total_pages
+    has_previous = page > 1
+
+    return {
+        "data": items,
+        "page": page,
+        "size": size,
+        "totalPages": total_pages,
+        "totalItems": total,
+        "hasNext": has_next,
+        "hasPrevious": has_previous
+    }

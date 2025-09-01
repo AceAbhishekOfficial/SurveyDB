@@ -61,3 +61,12 @@ class PersonResponse(PersonBase):
 
     class Config:
         orm_mode = True
+
+class PaginatedPersons(BaseModel):
+    data: List[PersonResponse]
+    page: int
+    size: int
+    totalPages: int
+    totalItems: int
+    hasNext: bool
+    hasPrevious: bool
