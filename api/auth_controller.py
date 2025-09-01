@@ -4,10 +4,19 @@ from pydantic import BaseModel
 from datetime import datetime, timedelta
 from jose import jwt
 from jose.exceptions import JWTError, ExpiredSignatureError
+import secrets
 
 SECRET_KEY = "iEjKtm8uVNQajjxW55Dso5dH35a2Rm66"  # replace with env var in production
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
+
+# added multiple credentials (for dev only — use proper storage in production)
+CREDENTIALS = {
+    "admin": "secret",
+    "alice": "T#9vLq2!x7Pz",
+    "bob": "P@55w0rd!72zQ",
+    "service_user": "G7$kLr9&bN1w"
+}
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 security = HTTPBearer()
@@ -31,8 +40,10 @@ def create_access_token(subject: str, expires_delta: timedelta | None = None) ->
 
 @router.post("/login", response_model=Token)
 async def login(payload: LoginRequest):
-    # hardcoded credentials
-    if not (payload.username == "admin" and payload.password == "secret"):
+    # hardcoded credentials (dev only)
+    if payload.username not in CREDENTIALS or not secrets.compare_digest(
+        CREDENTIALS[payload.username], payload.password
+    ):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
     token = create_access_token(payload.username)
     return {"access_token": token, "token_type": "bearer"}
