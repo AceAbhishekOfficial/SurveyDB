@@ -24,6 +24,7 @@ class PersonBase(BaseModel):
     occupation: str
     createdBy: str
     updatedBy: str
+    isDeleted: Optional[bool] = False
 
 # ---------------------------
 # For Create / Update
@@ -48,6 +49,7 @@ class PersonUpdate(BaseModel):
     rationCardHolder: Optional[bool] = None
     occupation: Optional[str] = None
     updatedBy: Optional[str] = None
+    isDeleted: Optional[bool] = False
 
 # ---------------------------
 # For Response

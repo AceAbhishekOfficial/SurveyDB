@@ -27,6 +27,8 @@ class PersonRepository:
         for key, value in person_update.dict(exclude_unset=True).items():
             setattr(db_person, key, value)
         db_person.updatedAt = datetime.utcnow()
+        if(person_update.isDeleted):
+            db_person.isDeleted = True
         self.db.commit()
         self.db.refresh(db_person)
         return db_person
