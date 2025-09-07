@@ -13,6 +13,7 @@ class Person(Base):
     gender = Column(String(10), nullable=False)
     religion = Column(String(50), nullable=False)
     casteCategory = Column(String(50), nullable=False)
+    cast = Column(String(50), nullable=False)
     married = Column(Boolean, nullable=False)
     highestEducationLevel = Column(String(50), nullable=False)
     village = Column(String(100), nullable=False)

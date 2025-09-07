@@ -13,6 +13,7 @@ class PersonBase(BaseModel):
     gender: str
     religion: str
     casteCategory: str
+    cast:str
     married: bool
     highestEducationLevel: str
     village: str
@@ -39,6 +40,7 @@ class PersonUpdate(BaseModel):
     gender: Optional[str] = None
     religion: Optional[str] = None
     casteCategory: Optional[str] = None
+    cast: Optional[str] = None
     married: Optional[bool] = None
     highestEducationLevel: Optional[str] = None
     village: Optional[str] = None
