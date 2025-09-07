@@ -8,7 +8,7 @@ import secrets
 
 SECRET_KEY = "iEjKtm8uVNQajjxW55Dso5dH35a2Rm66"  # replace with env var in production
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+ACCESS_TOKEN_EXPIRE_MINUTES = 60*24*100
 
 # added multiple credentials (for dev only — use proper storage in production)
 CREDENTIALS = {

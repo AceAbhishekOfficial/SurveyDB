@@ -45,6 +45,7 @@ def get_persons_updated_after(updatedAfter: datetime = 0, db: Session = Depends(
 
 @router.post("/persons/bulk", response_model=list[PersonResponse])
 def bulk_upsert_persons(persons: list[PersonCreate], db: Session = Depends(get_db)):
+    print(f"Bulk upsert request: {persons}")
     return PersonService(db).bulk_upsert_persons(persons)
 
 # New endpoint: getByFilters
