@@ -7,9 +7,9 @@ from sqlalchemy.orm import sessionmaker
 # Prefer a full DATABASE_URL env var; otherwise build from parts.
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
-    DB_USER = os.getenv("DB_USER", "root")
-    DB_PASSWORD = os.getenv("DB_PASSWORD", "Password1")
-    DB_HOST = os.getenv("DB_HOST", "localhost")
+    DB_USER = os.getenv("DB_USER", "admin")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", "Awkc7fcrJFGbPAkbnnIm")
+    DB_HOST = os.getenv("DB_HOST", "database-1.cluqwyq6oawx.eu-north-1.rds.amazonaws.com")
     DB_PORT = os.getenv("DB_PORT", "3306")
     DB_NAME = os.getenv("DB_NAME", "village_db")
     DB_DRIVER = os.getenv("DB_DRIVER", "mysql+pymysql")
