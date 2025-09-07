@@ -9,7 +9,6 @@ class Person(Base):
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     fullName = Column(String(100), nullable=False)
     fatherOrHusbandName = Column(String(100), nullable=True)
-    dateOfBirth = Column(DateTime, nullable=True)
     gender = Column(String(10), nullable=False)
     religion = Column(String(50), nullable=False)
     casteCategory = Column(String(50), nullable=False)

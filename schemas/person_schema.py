@@ -9,7 +9,6 @@ class PersonBase(BaseModel):
     id: Optional[str] = None  # allow null for new records
     fullName: str
     fatherOrHusbandName: Optional[str] = None
-    dateOfBirth: Optional[datetime] = None
     gender: str
     religion: str
     casteCategory: str
@@ -37,7 +36,6 @@ class PersonCreate(PersonBase):
 class PersonUpdate(BaseModel):
     fullName: Optional[str] = None
     fatherOrHusbandName: Optional[str] = None
-    dateOfBirth: Optional[datetime] = None
     gender: Optional[str] = None
     religion: Optional[str] = None
     casteCategory: Optional[str] = None
