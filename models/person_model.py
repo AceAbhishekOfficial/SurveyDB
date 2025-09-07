@@ -19,6 +19,7 @@ class Person(Base):
     village = Column(String(100), nullable=False)
     block = Column(String(100), nullable=False)
     district = Column(String(100), nullable=False)
+    houseNo = Column(String(50), nullable=False)
     address = Column(String(200), nullable=False)
     mobileNumber = Column(String(20), nullable=True)
     rationCardHolder = Column(Boolean, nullable=False)

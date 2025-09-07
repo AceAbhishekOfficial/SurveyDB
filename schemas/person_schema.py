@@ -19,6 +19,7 @@ class PersonBase(BaseModel):
     village: str
     block: str
     district: str
+    houseNo: str
     address: str
     mobileNumber: Optional[str] = None
     rationCardHolder: bool
@@ -46,6 +47,7 @@ class PersonUpdate(BaseModel):
     village: Optional[str] = None
     block: Optional[str] = None
     district: Optional[str] = None
+    houseNo: Optional[str] = None
     address: Optional[str] = None
     mobileNumber: Optional[str] = None
     rationCardHolder: Optional[bool] = None
