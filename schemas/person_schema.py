@@ -14,7 +14,7 @@ class PersonBase(BaseModel):
     religion: str
     casteCategory: str
     cast:str
-    married: bool
+    married: str
     highestEducationLevel: str
     village: str
     block: str
@@ -23,6 +23,7 @@ class PersonBase(BaseModel):
     address: str
     mobileNumber: Optional[str] = None
     rationCardHolder: bool
+    adhaarCardNumber: Optional[str] = None
     occupation: str
     createdBy: str
     updatedBy: str
@@ -42,12 +43,13 @@ class PersonUpdate(BaseModel):
     religion: Optional[str] = None
     casteCategory: Optional[str] = None
     cast: Optional[str] = None
-    married: Optional[bool] = None
+    married: Optional[str] = None
     highestEducationLevel: Optional[str] = None
     village: Optional[str] = None
     block: Optional[str] = None
     district: Optional[str] = None
     houseNo: Optional[str] = None
+    adhaarCardNumber: Optional[str] = None
     address: Optional[str] = None
     mobileNumber: Optional[str] = None
     rationCardHolder: Optional[bool] = None
